@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aetheris | Sitios Web a la Medida</title>
+    <style>
+      /* Variables y estilos generales */
+      :root {
+        --primary: #2563eb;
+        --primary-dark: #1d4ed8;
+        --secondary: #0f172a;
+        --light: #f8fafc;
+        --gray: #64748b;
+        --accent: #06b6d4;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background-color: var(--light);
+        color: var(--secondary);
+        line-height: 1.6;
+      }
+
+      section {
+        padding: 5rem 1rem;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-weight: 700;
+        line-height: 1.2;
+        margin-bottom: 1rem;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      h2 {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+        position: relative;
+      }
+
+      h2:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -0.5rem;
+        width: 80px;
+        height: 4px;
+        background: var(--primary);
+      }
+
+      p {
+        margin-bottom: 1.5rem;
+      }
+
+      .text-center {
+        text-align: center;
+      }
+
+      .text-center h2:after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .flex {
+        display: flex;
+      }
+
+      .flex-wrap {
+        flex-wrap: wrap;
+      }
+
+      .items-center {
+        align-items: center;
+      }
+
+      .justify-between {
+        justify-content: space-between;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 0.8rem 1.8rem;
+        background-color: var(--primary);
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+      }
+
+      .btn:hover {
+        background-color: var(--primary-dark);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .btn-outline {
+        background-color: transparent;
+        border: 2px solid var(--primary);
+        color: var(--primary);
+      }
+
+      .btn-outline:hover {
+        background-color: var(--primary);
+        color: white;
+      }
+
+      /* Header y navegación */
+      header {
+        background-color: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        transition: all 0.3s ease;
+      }
+
+      .header-scrolled {
+        padding: 0.5rem 0;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 0;
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--primary);
+        text-decoration: none;
+      }
+
+      .logo span {
+        color: var(--secondary);
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+      }
+
+      .nav-links li {
+        margin-left: 2rem;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: var(--secondary);
+        font-weight: 600;
+        transition: color 0.3s ease;
+        position: relative;
+      }
+
+      .nav-links a:hover {
+        color: var(--primary);
+      }
+
+      .nav-links a:after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -5px;
+        left: 0;
+        background-color: var(--primary);
+        transition: width 0.3s ease;
+      }
+
+      .nav-links a:hover:after {
+        width: 100%;
+      }
+
+      .mobile-menu-btn {
+        display: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 1.5rem;
+        color: var(--secondary);
+      }
+
+      /* Hero section */
+      .hero {
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--accent) 100%
+        );
+        color: white;
+        padding: 10rem 0 5rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.1)" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,181.3C384,203,480,213,576,202.7C672,192,768,160,864,144C960,128,1056,128,1152,149.3C1248,171,1344,213,1392,234.7L1440,256L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+        background-size: cover;
+        background-position: center;
+        opacity: 0.5;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 1;
+        max-width: 600px;
+      }
+
+      .hero h1 {
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
+        animation: fadeInUp 1s ease;
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        animation: fadeInUp 1s ease 0.2s both;
+      }
+
+      .hero-btns {
+        display: flex;
+        gap: 1rem;
+        animation: fadeInUp 1s ease 0.4s both;
+      }
+
+      .hero-image {
+        position: static;
+        right: -100px;
+        bottom: -50px;
+        width: 600px;
+        animation: floatAnimation 6s ease-in-out infinite;
+      }
+
+      /* Servicios */
+      .services {
+        background-color: white;
+        position: relative;
+      }
+
+      .service-card {
+        background-color: white;
+        border-radius: 10px;
+        padding: 2rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        border-bottom: 4px solid transparent;
+      }
+
+      .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        border-bottom-color: var(--primary);
+      }
+
+      .service-icon {
+        width: 60px;
+        height: 60px;
+        background-color: var(--primary);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      /* Tabla de planes */
+      .pricing {
+        background-color: #f1f5f9;
+      }
+
+      .pricing-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 2rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+
+      .pricing-table th,
+      .pricing-table td {
+        padding: 1rem;
+        text-align: left;
+        border-bottom: 1px solid #e2e8f0;
+      }
+
+      .pricing-table thead {
+        background-color: var(--primary);
+        color: white;
+      }
+
+      .pricing-table tr:nth-child(even) {
+        background-color: #f8fafc;
+      }
+
+      .pricing-table tr:hover {
+        background-color: #e2e8f0;
+      }
+
+      /* Features section */
+      .features {
+        background-color: white;
+      }
+
+      .feature {
+        display: flex;
+        margin-bottom: 3rem;
+      }
+
+      .feature-icon {
+        flex: 0 0 50px;
+        height: 50px;
+        background-color: rgba(37, 99, 235, 0.1);
+        color: var(--primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        margin-right: 1.5rem;
+      }
+
+      .feature-content {
+        flex: 1;
+      }
+
+      /* Formulario de contacto */
+      .contact {
+        background-color: #f1f5f9;
+      }
+
+      .contact-form {
+        background-color: white;
+        border-radius: 10px;
+        padding: 2rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 0.8rem;
+        border: 1px solid #e2e8f0;
+        border-radius: 5px;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+      }
+
+      .form-control:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+      }
+
+      textarea.form-control {
+        height: 150px;
+        resize: vertical;
+      }
+
+      /* Footer */
+      footer {
+        background-color: var(--secondary);
+        color: white;
+        padding: 3rem 0;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+      }
+
+      .footer-logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 1rem;
+      }
+
+      .footer-links h4 {
+        margin-bottom: 1rem;
+        position: relative;
+      }
+
+      .footer-links h4:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -0.3rem;
+        width: 40px;
+        height: 2px;
+        background: var(--primary);
+      }
+
+      .footer-links ul {
+        list-style: none;
+      }
+
+      .footer-links li {
+        margin-bottom: 0.5rem;
+      }
+
+      .footer-links a {
+        color: var(--gray);
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .footer-links a:hover {
+        color: white;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .social-links a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background-color: rgba(255, 255, 255, 0.1);
+        color: white;
+        border-radius: 50%;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .social-links a:hover {
+        background-color: var(--primary);
+        transform: translateY(-3px);
+      }
+
+      .copyright {
+        text-align: center;
+        padding-top: 2rem;
+        margin-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: var(--gray);
+      }
+
+      /* Animaciones */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes floatAnimation {
+        0% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+
+      .fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Responsive */
+      @media (max-width: 992px) {
+        h1 {
+          font-size: 2.2rem;
+        }
+
+        h2 {
+          font-size: 1.8rem;
+        }
+
+        .hero-image {
+          width: 400px;
+          right: -50px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          position: fixed;
+          top: 80px;
+          left: 0;
+          width: 100%;
+          background-color: white;
+          flex-direction: column;
+          align-items: center;
+          padding: 2rem 0;
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+          transform: translateY(-150%);
+          transition: transform 0.3s ease;
+          z-index: 100;
+        }
+
+        .nav-links.active {
+          transform: translateY(0);
+        }
+
+        .nav-links li {
+          margin: 1rem 0;
+        }
+
+        .mobile-menu-btn {
+          display: block;
+        }
+
+        .hero {
+          padding: 8rem 0 5rem;
+          text-align: center;
+        }
+
+        .hero-content {
+          margin: 0 auto;
+        }
+
+        .hero-btns {
+          justify-content: center;
+        }
+
+        .hero-image {
+          display: none;
+        }
+
+        .grid {
+          grid-template-columns: 1fr;
+        }
+
+        .pricing-table {
+          overflow-x: auto;
+          display: block;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="header">
+      <div class="container">
+        <nav>
+          <a href="#" class="logo">Ae<span>theris</span></a>
+          <ul class="nav-links" id="navLinks">
+            <li><a href="#hero">Inicio</a></li>
+            <li><a href="#services">Servicios</a></li>
+            <li><a href="#pricing">Planes</a></li>
+            <li><a href="#features">Beneficios</a></li>
+            <li><a href="#contact">Contacto</a></li>
+          </ul>
+          <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+      <div class="container flex items-center">
+        <div class="hero-content">
+          <h1>Sitios Web a la Medida para Tu Negocio</h1>
+          <p>
+            Diseñamos y desarrollamos sitios web de alta calidad, responsive y
+            personalizados para impulsar tu presencia digital y aumentar tus
+            ventas.
+          </p>
+          <div class="hero-btns">
+            <a href="#pricing" class="btn">Ver Planes</a>
+            <a href="#contact" class="btn btn-outline">Contactar</a>
+          </div>
+        </div>
+        <img src="hero-image.jpg" alt="Imagen Hero" class="hero-image" />
+      </div>
+    </section>
+
+    <!-- Servicios -->
+    <section id="services" class="services">
+      <div class="container">
+        <div class="text-center fade-in">
+          <h2>Nuestros Servicios</h2>
+          <p>
+            Ofrecemos soluciones digitales completas para cualquier tipo de
+            negocio o proyecto
+          </p>
+        </div>
+        <div class="grid">
+          <div class="service-card fade-in">
+            <div class="service-icon">
+              <span>🖥️</span>
+            </div>
+            <h3>Desarrollo Web Personalizado</h3>
+            <p>
+              Creamos sitios web únicos y a medida que reflejan la identidad de
+              tu marca y cumplen tus objetivos de negocio.
+            </p>
+          </div>
+          <div class="service-card fade-in">
+            <div class="service-icon">
+              <span>📱</span>
+            </div>
+            <h3>Diseño Responsive</h3>
+            <p>
+              Todos nuestros sitios se adaptan perfectamente a cualquier
+              dispositivo, garantizando una experiencia óptima para tus
+              usuarios.
+            </p>
+          </div>
+          <div class="service-card fade-in">
+            <div class="service-icon">
+              <span>🛒</span>
+            </div>
+            <h3>Tiendas Online</h3>
+            <p>
+              Desarrollamos plataformas e-commerce completas para que puedas
+              vender tus productos o servicios en línea.
+            </p>
+          </div>
+          <div class="service-card fade-in">
+            <div class="service-icon">
+              <span>🔍</span>
+            </div>
+            <h3>SEO y Marketing Digital</h3>
+            <p>
+              Optimizamos tu sitio para motores de búsqueda y desarrollamos
+              estrategias para aumentar tu visibilidad online.
+            </p>
+          </div>
+          <div class="service-card fade-in">
+            <div class="service-icon">
+              <span>🔧</span>
+            </div>
+            <h3>Mantenimiento Web</h3>
+            <p>
+              Ofrecemos servicios de mantenimiento continuo para garantizar que
+              tu sitio esté siempre actualizado y funcionando correctamente.
+            </p>
+          </div>
+          <div class="service-card fade-in">
+            <div class="service-icon">
+              <span>📊</span>
+            </div>
+            <h3>Análisis y Reportes</h3>
+            <p>
+              Te proporcionamos informes detallados sobre el rendimiento de tu
+              sitio web y recomendaciones para mejorarlo.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Planes y Precios -->
+    <section id="pricing" class="pricing">
+      <div class="container">
+        <div class="text-center fade-in">
+          <h2>Planes de Desarrollo</h2>
+          <p>
+            Ofrecemos diferentes opciones que se adaptan a tus necesidades y
+            presupuesto
+          </p>
+        </div>
+        <div class="table-responsive fade-in">
+          <table class="pricing-table">
+            <thead>
+              <tr>
+                <th>Tipo de Sitio</th>
+                <th>Descripción</th>
+                <th>Funcionalidades Incluidas</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Sitio Web Básico</strong></td>
+                <td>
+                  Ideal para negocios que necesitan solo presencia online.
+                </td>
+                <td>
+                  <ul>
+                    <li>Página principal tipo "landing"</li>
+                    <li>Secciones: Inicio, Servicios, Contacto, Nosotros</li>
+                    <li>Diseño responsive</li>
+                    <li>Formulario de contacto básico</li>
+                    <li>Mapa de ubicación y enlaces a redes sociales</li>
+                  </ul>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Sitio Intermedio</strong></td>
+                <td>
+                  Pensado para empresas que requieren más contenido y
+                  herramientas para captar clientes.
+                </td>
+                <td>
+                  <ul>
+                    <li>Todo lo del sitio básico</li>
+                    <li>Blog o sección de noticias</li>
+                    <li>Galería de imágenes o portafolio</li>
+                    <li>Formulario avanzado (reservas, cotizaciones, etc.)</li>
+                    <li>
+                      Panel de administración simple (CMS personalizado básico)
+                    </li>
+                    <li>Sección de productos sin carrito de compras</li>
+                  </ul>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Sitio Avanzado</strong></td>
+                <td>
+                  Dirigido a negocios que necesitan funcionalidades completas o
+                  personalizadas.
+                </td>
+                <td>
+                  <ul>
+                    <li>Todo lo del sitio intermedio</li>
+                    <li>Usuarios con login y autenticación</li>
+                    <li>Carrito de compras (ecommerce)</li>
+                    <li>Gestión de inventario o sistema CRM</li>
+                    <li>Integración con pasarelas de pago</li>
+                    <li>Panel de administración completo</li>
+                    <li>Dashboard de estadísticas</li>
+                    <li>Roles y permisos de usuario</li>
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="text-center" style="margin-top: 3rem">
+          <a href="#contact" class="btn fade-in">Solicitar Cotización</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Características / Beneficios -->
+    <section id="features" class="features">
+      <div class="container">
+        <div class="text-center fade-in">
+          <h2>Por Qué Elegirnos</h2>
+          <p>
+            Nos destacamos por ofrecer soluciones digitales de calidad,
+            personalizadas y con excelente soporte
+          </p>
+        </div>
+        <div class="grid">
+          <div class="fade-in">
+            <div class="feature">
+              <div class="feature-icon">✨</div>
+              <div class="feature-content">
+                <h3>Diseño Personalizado</h3>
+                <p>
+                  Cada proyecto es único. Creamos diseños a medida que reflejan
+                  la identidad de tu marca y te diferencian de la competencia.
+                </p>
+              </div>
+            </div>
+            <div class="feature">
+              <div class="feature-icon">⚡</div>
+              <div class="feature-content">
+                <h3>Optimizado para Velocidad</h3>
+                <p>
+                  Desarrollamos sitios rápidos y eficientes que mejoran la
+                  experiencia del usuario y el posicionamiento en buscadores.
+                </p>
+              </div>
+            </div>
+            <div class="feature">
+              <div class="feature-icon">🔒</div>
+              <div class="feature-content">
+                <h3>Seguridad Garantizada</h3>
+                <p>
+                  Implementamos las mejores prácticas de seguridad para proteger
+                  tu sitio y los datos de tus usuarios.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="fade-in">
+            <div class="feature">
+              <div class="feature-icon">📱</div>
+              <div class="feature-content">
+                <h3>100% Responsive</h3>
+                <p>
+                  Tu sitio se verá perfecto en cualquier dispositivo, desde
+                  smartphones hasta pantallas de escritorio.
+                </p>
+              </div>
+            </div>
+            <div class="feature">
+              <div class="feature-icon">🔍</div>
+              <div class="feature-content">
+                <h3>SEO Optimizado</h3>
+                <p>
+                  Implementamos las mejores prácticas de SEO para que tu sitio
+                  sea encontrado fácilmente en los motores de búsqueda.
+                </p>
+              </div>
+            </div>
+            <div class="feature">
+              <div class="feature-icon">🛠️</div>
+              <div class="feature-content">
+                <h3>Soporte Continuo</h3>
+                <p>
+                  No te dejamos solo. Ofrecemos soporte técnico y asesoramiento
+                  continuo para que tu sitio siempre esté en óptimas
+                  condiciones.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Formulario de Contacto -->
+    <section id="contact" class="contact">
+      <div class="container">
+        <div class="text-center fade-in">
+          <h2>Contacta con Nosotros</h2>
+          <p>
+            ¿Estás listo para dar el siguiente paso? Contáctanos y te
+            responderemos a la brevedad
+          </p>
+        </div>
+        <div class="grid">
+          <div class="contact-info fade-in">
+            <h3>Información de Contacto</h3>
+            <p>
+              Estamos aquí para ayudarte. Puedes contactarnos a través de
+              cualquiera de estos medios o completando el formulario.
+            </p>
+            <div class="feature">
+              <div class="feature-icon">📍</div>
+              <div class="feature-content">
+                <h4>Dirección</h4>
+                <p>Av. Principal 123, Ciudad</p>
+              </div>
+            </div>
+            <div class="feature">
+              <div class="feature-icon">📞</div>
+              <div class="feature-content">
+                <h4>Teléfono</h4>
+                <p>+1 234 567 890</p>
+              </div>
+            </div>
+            <div class="feature">
+              <div class="feature-icon">✉️</div>
+              <div class="feature-content">
+                <h4>Email</h4>
+                <p>info@Aetheris.com</p>
+              </div>
+            </div>
+            <div class="social-links">
+              <a href="#" aria-label="Facebook">📱</a>
+              <a href="#" aria-label="Twitter">📱</a>
+              <a href="#" aria-label="Instagram">📱</a>
+              <a href="#" aria-label="LinkedIn">📱</a>
+            </div>
+          </div>
+          <div class="contact-form fade-in">
+            <h3>Envíanos un Mensaje</h3>
+            <form id="contactForm">
+              <div class="form-group">
+                <label for="name">Nombre</label>
+                <input type="text" id="name" class="form-control" required />
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" class="form-control" required />
+              </div>
+              <div class="form-group">
+                <label for="project">Tipo de Proyecto</label>
+                <select id="project" class="form-control">
+                  <option value="">Selecciona una opción</option>
+                  <option value="basic">Sitio Web Básico</option>
+                  <option value="intermediate">Sitio Intermedio</option>
+                  <option value="advanced">Sitio Avanzado</option>
+                  <option value="other">Otro</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="message">Mensaje</label>
+                <textarea id="message" class="form-control" required></textarea>
+              </div>
+              <button type="submit" class="btn">Enviar Mensaje</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-about">
+            <h3 class="footer-logo">Aetheris</h3>
+            <p>
+              Somos expertos en desarrollo web con más de 10 años de experiencia
+              creando soluciones digitales efectivas para todo tipo de negocios.
+            </p>
+            <div class="social-links">
+              <a href="#" aria-label="Facebook">📱</a>
+              <a href="#" aria-label="Twitter">📱</a>
+              <a href="#" aria-label="Instagram">📱</a>
+              <a href="#" aria-label="LinkedIn">📱</a>
+            </div>
+          </div>
+          <div class="footer-links">
+            <h4>Enlaces Rápidos</h4>
+            <ul>
+              <li><a href="#hero">Inicio</a></li>
+              <li><a href="#services">Servicios</a></li>
+              <li><a href="#pricing">Planes</a></li>
+              <li><a href="#features">Beneficios</a></li>
+              <li><a href="#contact">Contacto</a></li>
+            </ul>
+          </div>
+          <div class="footer-links">
+            <h4>Servicios</h4>
+            <ul>
+              <li><a href="#">Desarrollo Web</a></li>
+              <li><a href="#">Tiendas Online</a></li>
+              <li><a href="#">SEO</a></li>
+              <li><a href="#">Mantenimiento</a></li>
+              <li><a href="#">Marketing Digital</a></li>
+            </ul>
+          </div>
+          <div class="footer-links">
+            <h4>Contacto</h4>
+            <ul>
+              <li>Av. Principal 123, Ciudad</li>
+              <li>+1 234 567 890</li>
+              <li>info@Aetheris.com</li>
+            </ul>
+          </div>
+        </div>
+        <div class="copyright">
+          <p>&copy; 2025 Aetheris. Todos los derechos reservados.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
