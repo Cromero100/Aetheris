@@ -176,3 +176,83 @@ window.addEventListener("scroll", () => {
     }
   });
 });
+document.addEventListener("DOMContentLoaded", function () {
+  const track = document.getElementById("carouselTrack");
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+  const indicators = document.querySelectorAll(".indicator");
+
+  let currentSlide = 0;
+  const totalSlides = 5;
+
+  function updateCarousel() {
+    const translateX = -currentSlide * 20; // 20% por slide
+    track.style.transform = `translateX(${translateX}%)`;
+
+    // Actualizar indicadores
+    indicators.forEach((indicator, index) => {
+      indicator.classList.toggle("active", index === currentSlide);
+    });
+  }
+
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    updateCarousel();
+  }
+
+  function prevSlide() {
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    updateCarousel();
+  }
+
+  // Event listeners
+  nextBtn.addEventListener("click", nextSlide);
+  prevBtn.addEventListener("click", prevSlide);
+
+  // Indicadores
+  indicators.forEach((indicator, index) => {
+    indicator.addEventListener("click", () => {
+      currentSlide = index;
+      updateCarousel();
+    });
+  });
+
+  // Auto-play (opcional)
+  let autoPlayInterval = setInterval(nextSlide, 5000);
+
+  // Pausar auto-play al hacer hover
+  const carouselContainer = document.querySelector(".carousel-container");
+  carouselContainer.addEventListener("mouseenter", () => {
+    clearInterval(autoPlayInterval);
+  });
+
+  carouselContainer.addEventListener("mouseleave", () => {
+    autoPlayInterval = setInterval(nextSlide, 5000);
+  });
+
+  // Soporte para touch/swipe en móviles
+  let startX = 0;
+  let endX = 0;
+
+  carouselContainer.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+  });
+
+  carouselContainer.addEventListener("touchend", (e) => {
+    endX = e.changedTouches[0].clientX;
+    handleSwipe();
+  });
+
+  function handleSwipe() {
+    const swipeThreshold = 50;
+    const diff = startX - endX;
+
+    if (Math.abs(diff) > swipeThreshold) {
+      if (diff > 0) {
+        nextSlide();
+      } else {
+        prevSlide();
+      }
+    }
+  }
+});

@@ -3,6 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Font Awesome CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      integrity="sha512-/1P74IFUBO2ZT0nHJ8lVgB2xhFeZgyE9XnJ+ltNNb8VRVrhd6+aZ1qvQozqQmRkGp1n3Fv7Nz8RgKgF4MdXAhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
     <title>Aetheris | Sitios Web a la Medida</title>
     <style>
       /* Variables y estilos generales */
@@ -36,6 +45,227 @@
         padding: 5rem 1rem;
       }
 
+      .portfolio {
+        background-color: white;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .carousel-container {
+        position: relative;
+        max-width: 1000px;
+        margin: 0 auto;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      .carousel-wrapper {
+        overflow: hidden;
+        width: 100%;
+      }
+
+      .carousel-track {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        width: 500%; /* 5 slides × 100% */
+      }
+
+      .carousel-slide {
+        width: 20%; /* 100% / 5 slides */
+        flex-shrink: 0;
+      }
+
+      .portfolio-item {
+        position: relative;
+        height: 400px;
+        overflow: hidden;
+      }
+
+      .portfolio-image {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      .portfolio-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+
+      .portfolio-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          135deg,
+          rgba(37, 99, 235, 0.9) 0%,
+          rgba(6, 182, 212, 0.9) 100%
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .portfolio-item:hover .portfolio-overlay {
+        opacity: 1;
+      }
+
+      .portfolio-item:hover .portfolio-image img {
+        transform: scale(1.1);
+      }
+
+      .portfolio-info {
+        text-align: center;
+        color: white;
+        padding: 2rem;
+      }
+
+      .portfolio-info h4 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        font-weight: 700;
+      }
+
+      .portfolio-info p {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+        opacity: 0.9;
+      }
+
+      .portfolio-tags {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+
+      .tag {
+        background-color: rgba(255, 255, 255, 0.2);
+        color: white;
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        backdrop-filter: blur(10px);
+      }
+
+      /* Controles del carrusel */
+      .carousel-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 50px;
+        height: 50px;
+        background-color: rgba(255, 255, 255, 0.9);
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        color: var(--primary);
+        transition: all 0.3s ease;
+        z-index: 10;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .carousel-btn:hover {
+        background-color: var(--primary);
+        color: white;
+        transform: translateY(-50%) scale(1.1);
+      }
+
+      .carousel-btn-prev {
+        left: 20px;
+      }
+
+      .carousel-btn-next {
+        right: 20px;
+      }
+
+      /* Indicadores */
+      .carousel-indicators {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-top: 2rem;
+      }
+
+      .indicator {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: #e2e8f0;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .indicator.active {
+        background-color: var(--primary);
+        transform: scale(1.2);
+      }
+
+      .indicator:hover {
+        background-color: var(--primary);
+        opacity: 0.7;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .portfolio-item {
+          height: 300px;
+        }
+
+        .carousel-btn {
+          width: 40px;
+          height: 40px;
+          font-size: 1rem;
+        }
+
+        .carousel-btn-prev {
+          left: 10px;
+        }
+
+        .carousel-btn-next {
+          right: 10px;
+        }
+
+        .portfolio-info {
+          padding: 1rem;
+        }
+
+        .portfolio-info h4 {
+          font-size: 1.2rem;
+        }
+
+        .portfolio-info p {
+          font-size: 0.9rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .portfolio-item {
+          height: 250px;
+        }
+
+        .portfolio-tags {
+          gap: 0.3rem;
+        }
+
+        .tag {
+          font-size: 0.7rem;
+          padding: 0.2rem 0.6rem;
+        }
+      }
       .container {
         max-width: 1200px;
         margin: 0 auto;
@@ -546,6 +776,14 @@
           right: -50px;
         }
       }
+      .input[type="submit"] {
+        display: block;
+        padding: 6px 30px;
+        font-size: 14px;
+        background-color: #4460aa;
+        color: #fff;
+        border: none;
+      }
 
       @media (max-width: 768px) {
         .nav-links {
@@ -631,6 +869,7 @@
             personalizados para impulsar tu presencia digital y aumentar tus
             ventas.
           </p>
+
           <div class="hero-btns">
             <a href="#pricing" class="btn">Ver Planes</a>
             <a href="#contact" class="btn btn-outline">Contactar</a>
@@ -711,6 +950,142 @@
               Te proporcionamos informes detallados sobre el rendimiento de tu
               sitio web y recomendaciones para mejorarlo.
             </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección Portfolio/Carrusel -->
+    <section id="portfolio" class="portfolio">
+      <div class="container">
+        <div class="text-center fade-in">
+          <h2>Nuestro Portafolio</h2>
+          <p>
+            Conoce algunos de los proyectos que hemos desarrollado para nuestros
+            clientes
+          </p>
+        </div>
+
+        <div class="carousel-container fade-in">
+          <div class="carousel-wrapper">
+            <div class="carousel-track" id="carouselTrack">
+              <!-- Proyecto 1 -->
+              <div class="carousel-slide">
+                <div class="portfolio-item">
+                  <div class="portfolio-image">
+                    <img src="./img/ecommerce.png" alt="Proyecto 1" />
+                    <div class="portfolio-overlay">
+                      <div class="portfolio-info">
+                        <h4>E-commerce Tienda de Ropa</h4>
+                        <p>
+                          Sitio web completo con carrito de compras y pasarela
+                          de pago
+                        </p>
+                        <div class="portfolio-tags">
+                          <span class="tag">E-commerce</span>
+                          <span class="tag">Responsive</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Proyecto 2 -->
+              <div class="carousel-slide">
+                <div class="portfolio-item">
+                  <div class="portfolio-image">
+                    <img src="./img/restaurant.jpg" alt="Proyecto 2" />
+                    <div class="portfolio-overlay">
+                      <div class="portfolio-info">
+                        <h4>Sitio Corporativo Restaurante</h4>
+                        <p>Página web con sistema de reservas y menú digital</p>
+                        <div class="portfolio-tags">
+                          <span class="tag">Corporativo</span>
+                          <span class="tag">Reservas</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Proyecto 3 -->
+              <div class="carousel-slide">
+                <div class="portfolio-item">
+                  <div class="portfolio-image">
+                    <img src="./img/fotografia.png" alt="Proyecto 3" />
+                    <div class="portfolio-overlay">
+                      <div class="portfolio-info">
+                        <h4>Blog Personal de Fotografía</h4>
+                        <p>Sitio web minimalista con galería interactiva</p>
+                        <div class="portfolio-tags">
+                          <span class="tag">Blog</span>
+                          <span class="tag">Galería</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Proyecto 4 -->
+              <div class="carousel-slide">
+                <div class="portfolio-item">
+                  <div class="portfolio-image">
+                    <img src="./img/educativa.png" alt="Proyecto 4" />
+                    <div class="portfolio-overlay">
+                      <div class="portfolio-info">
+                        <h4>Plataforma Educativa</h4>
+                        <p>
+                          Sistema de gestión de cursos con panel de estudiantes
+                        </p>
+                        <div class="portfolio-tags">
+                          <span class="tag">Educativo</span>
+                          <span class="tag">Dashboard</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Proyecto 5 -->
+              <div class="carousel-slide">
+                <div class="portfolio-item">
+                  <div class="portfolio-image">
+                    <img src="./img/landing-page2.webp" alt="Proyecto 5" />
+                    <div class="portfolio-overlay">
+                      <div class="portfolio-info">
+                        <h4>Landing Page Startup</h4>
+                        <p>Página de aterrizaje moderna con animaciones</p>
+                        <div class="portfolio-tags">
+                          <span class="tag">Landing</span>
+                          <span class="tag">Animaciones</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Controles del carrusel -->
+          <button class="carousel-btn carousel-btn-prev" id="prevBtn">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="carousel-btn carousel-btn-next" id="nextBtn">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+
+          <!-- Indicadores -->
+          <div class="carousel-indicators" id="carouselIndicators">
+            <span class="indicator active" data-slide="0"></span>
+            <span class="indicator" data-slide="1"></span>
+            <span class="indicator" data-slide="2"></span>
+            <span class="indicator" data-slide="3"></span>
+            <span class="indicator" data-slide="4"></span>
           </div>
         </div>
       </div>
@@ -899,28 +1274,22 @@
               <div class="feature-icon">📍</div>
               <div class="feature-content">
                 <h4>Dirección</h4>
-                <p>Av. Principal 123, Ciudad</p>
+                <p>Calle 14#10-40, Ocaña</p>
               </div>
             </div>
             <div class="feature">
               <div class="feature-icon">📞</div>
               <div class="feature-content">
                 <h4>Teléfono</h4>
-                <p>+1 234 567 890</p>
+                <p>+57 320 996 0982</p>
               </div>
             </div>
             <div class="feature">
               <div class="feature-icon">✉️</div>
               <div class="feature-content">
                 <h4>Email</h4>
-                <p>info@Aetheris.com</p>
+                <p>cfromerop@ufpso.edu.co</p>
               </div>
-            </div>
-            <div class="social-links">
-              <a href="#" aria-label="Facebook">📱</a>
-              <a href="#" aria-label="Twitter">📱</a>
-              <a href="#" aria-label="Instagram">📱</a>
-              <a href="#" aria-label="LinkedIn">📱</a>
             </div>
           </div>
           <div class="contact-form fade-in">
@@ -928,15 +1297,27 @@
             <form id="contactForm">
               <div class="form-group">
                 <label for="name">Nombre</label>
-                <input type="text" id="name" class="form-control" required />
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  class="form-control"
+                  required
+                />
               </div>
               <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" class="form-control" required />
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  class="form-control"
+                  required
+                />
               </div>
               <div class="form-group">
                 <label for="project">Tipo de Proyecto</label>
-                <select id="project" class="form-control">
+                <select id="project" name="project" class="form-control">
                   <option value="">Selecciona una opción</option>
                   <option value="basic">Sitio Web Básico</option>
                   <option value="intermediate">Sitio Intermedio</option>
@@ -946,9 +1327,28 @@
               </div>
               <div class="form-group">
                 <label for="message">Mensaje</label>
-                <textarea id="message" class="form-control" required></textarea>
+                <textarea
+                  id="message"
+                  name="message"
+                  class="form-control"
+                  required
+                ></textarea>
               </div>
-              <button type="submit" class="btn">Enviar Mensaje</button>
+
+              <input
+                type="submit"
+                id="button"
+                class="btn"
+                value="Enviar Mensaje"
+              />
+              <script
+                type="text/javascript"
+                src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+              ></script>
+
+              <script type="text/javascript">
+                emailjs.init("9FsrcwKecBMayud5j");
+              </script>
             </form>
           </div>
         </div>
@@ -962,15 +1362,9 @@
           <div class="footer-about">
             <h3 class="footer-logo">Aetheris</h3>
             <p>
-              Somos expertos en desarrollo web con más de 10 años de experiencia
-              creando soluciones digitales efectivas para todo tipo de negocios.
+              Somos expertos en desarrollo web enfocados en crear soluciones
+              digitales efectivas para todo tipo de negocios.
             </p>
-            <div class="social-links">
-              <a href="#" aria-label="Facebook">📱</a>
-              <a href="#" aria-label="Twitter">📱</a>
-              <a href="#" aria-label="Instagram">📱</a>
-              <a href="#" aria-label="LinkedIn">📱</a>
-            </div>
           </div>
           <div class="footer-links">
             <h4>Enlaces Rápidos</h4>
@@ -995,9 +1389,9 @@
           <div class="footer-links">
             <h4>Contacto</h4>
             <ul>
-              <li>Av. Principal 123, Ciudad</li>
-              <li>+1 234 567 890</li>
-              <li>info@Aetheris.com</li>
+              <li>Calle 14#10-40, Ocaña</li>
+              <li>+57 320 996 0982</li>
+              <li>cfromerop@ufpso.edu.co</li>
             </ul>
           </div>
         </div>
