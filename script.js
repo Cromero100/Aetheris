@@ -4,10 +4,29 @@ const mobileMenuBtn = document.getElementById("mobileMenuBtn");
 const navLinks = document.getElementById("navLinks");
 const fadeElements = document.querySelectorAll(".fade-in");
 const contactForm = document.getElementById("contactForm");
-
+const btn = document.getElementById('button');
 // Menú móvil
 mobileMenuBtn.addEventListener("click", () => {
   navLinks.classList.toggle("active");
+});
+
+document.getElementById('contactForm')
+ .addEventListener('submit', function(event) {
+   event.preventDefault();
+
+   btn.value = 'Enviando...';
+
+   const serviceID = 'default_service';
+   const templateID = 'template_4o4ldpf';
+
+   emailjs.sendForm(serviceID, templateID, this)
+    .then(() => {
+      btn.value = 'Enviar Email';
+      alert('Sent!');
+    }, (err) => {
+      btn.value = 'Enviar Email';
+      alert(JSON.stringify(err));
+    });
 });
 
 // Cerrar menú al hacer clic en un enlace
